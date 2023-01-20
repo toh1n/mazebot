@@ -5,7 +5,11 @@ void MazeSolve() {
     analogWrite(rightMotorPWM, 0);
     analogWrite(leftMotorPWM, 0);
     delay(10);
-     digitalHigh(buzzer);
+    digitalHigh(buzzer);
+    
+    unsigned char found_left = 0;
+    unsigned char found_straight = 0;
+    unsigned char found_right = 0;
 
     readLine();
     if (sensor_values[0] > threshold || sensor_values[1] > threshold) {
