@@ -55,13 +55,25 @@ void getBackToStart() {
 }
 
 void rotate180() {
+
+  analogWrite(rightMotorPWM, 0);
+  analogWrite(leftMotorPWM, 0);
+  delay(400);
+
   digitalLow(rightMotor1);
   digitalHigh(rightMotor2);
   digitalLow(leftMotor1);
   digitalHigh(leftMotor2);
   analogWrite(rightMotorPWM, speedturnR);
   analogWrite(leftMotorPWM, speedturnL);
-  delay(600);
+
+  line_position = readLine();
+
+  while (sensor_values[6] > 400)  // wait for outer most sensor to find the line
+  {
+    line_position = readLine();
+  }
+  
   line_position = readLine();
 
   while (sensor_values[6] < threshold)  // wait for outer most sensor to find the line

@@ -28,7 +28,7 @@ void follow_line()  //follow the line
     lastError = error;
 
     readLine();
-    if (sensor_values[0] > threshold || sensor_values[7] > threshold) {
+    if (sensor_values[0] > 450 || sensor_values[7] > threshold) {
       analogWrite(rightMotorPWM, rightMaxSpeed);
       analogWrite(leftMotorPWM, leftMaxSpeed);
       return;

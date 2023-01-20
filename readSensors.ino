@@ -17,8 +17,8 @@ long mapa(long x, long in_min, long in_max, long out_min, long out_max) {
 
 uint16_t readLine() {
   bool onLine = false;
-  uint32_t avg = 0;  
-  uint16_t sum = 0;  
+  uint32_t avg = 0;  // this is for the weighted total
+  uint16_t sum = 0;  // this is for the denominator, which is <= 64000
   readCalibrated();
 
   for (uint8_t i = 0; i < N_SENS; i++) {

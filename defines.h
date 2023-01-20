@@ -23,7 +23,7 @@
 #define leftMotor1 4
 #define leftMotor2 5
 #define leftMotorPWM 10
-#define threshold 700
+#define threshold 500
 #define led 13
 #define buzzer 11
 #define button 12
@@ -33,17 +33,17 @@
 #define Ki .01
 #define MaxSpeed 145
 int leftMaxSpeed = 115;
-int rightMaxSpeed = 200;
+int rightMaxSpeed = 180;
 int speedturnL = 60;
-int speedturnR = 100;
+int speedturnR = 80;
 #define speedturn 100  // edit this to determine the speed during taking turns
 int lastError = 0;
 
 #define N_SENS 8
 int sensor_values[N_SENS];
-int sens_max[N_SENS] = { 869, 780, 984, 985, 953, 998, 937, 888 }; // Maximum value from each sensor
-int sens_min[N_SENS] = { 34, 32, 38, 52, 45, 52, 37, 35 }; // Minimum value from each sensor
-int sensor[N_SENS] = { 7, 6, 5, 4, 3, 2, 1, 0 }; // Sensor pins on arduino
+int sens_max[N_SENS] = {830, 880, 920, 880, 920, 920, 700, 780};
+int sens_min[N_SENS] = { 35, 37, 52, 45, 52, 38, 32, 34 };
+int sensor[N_SENS] = { 7, 6, 5, 4, 3, 2, 1, 0 };
 int lastPosition = 0;
 unsigned int line_position = 0;
 
@@ -51,3 +51,4 @@ char path[100] = "";
 char reversePath[100] = "";
 unsigned char dir;
 unsigned char path_length = 0;
+
