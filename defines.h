@@ -51,6 +51,3 @@ char path[100] = "";
 char reversePath[100] = "";
 unsigned char dir;
 unsigned char path_length = 0;
-unsigned char found_left = 0;
-unsigned char found_straight = 0;
-unsigned char found_right = 0;
