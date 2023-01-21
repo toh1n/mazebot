@@ -31,17 +31,16 @@
 #define Kp 0.1
 #define Kd 0.5
 #define Ki .01
-#define MaxSpeed 145
+int MaxSpeed = 145;
 int leftMaxSpeed = 115;
 int rightMaxSpeed = 180;
 int speedturnL = 60;
 int speedturnR = 80;
-#define speedturn 100  // edit this to determine the speed during taking turns
 int lastError = 0;
 
 #define N_SENS 8
 int sensor_values[N_SENS];
-int sens_max[N_SENS] = {830, 880, 920, 880, 920, 920, 700, 780};
+int sens_max[N_SENS] = { 830, 880, 920, 880, 920, 920, 700, 780 };
 int sens_min[N_SENS] = { 35, 37, 52, 45, 52, 38, 32, 34 };
 int sensor[N_SENS] = { 7, 6, 5, 4, 3, 2, 1, 0 };
 int lastPosition = 0;
@@ -51,4 +50,3 @@ char path[100] = "";
 char reversePath[100] = "";
 unsigned char dir;
 unsigned char path_length = 0;
-

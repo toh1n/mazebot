@@ -1,88 +1,67 @@
 void turn(char dir) {
   switch (dir) {
+    
     case 'L':
-      digitalHigh(rightMotor1);
-      digitalLow(rightMotor2);
-      digitalHigh(leftMotor1);
-      digitalLow(leftMotor2);
-      analogWrite(rightMotorPWM, speedturnR);
-      analogWrite(leftMotorPWM, speedturnL);
+      left();
       line_position = readLine();
-
       while (sensor_values[1] < threshold) {
         line_position = readLine();
       }
 
       line_position = readLine();
-
       while (sensor_values[2] < threshold || sensor_values[3] < threshold || sensor_values[4] < threshold)  // wait for outer most sensor to find the line
       {
         line_position = readLine();
       }
-      analogWrite(rightMotorPWM, 0);
-      analogWrite(leftMotorPWM, 0);
+
+      brake();
       delay(10);
       break;
 
     // Turn right 90deg
     case 'R':
-      digitalLow(rightMotor1);
-      digitalHigh(rightMotor2);
-      digitalLow(leftMotor1);
-      digitalHigh(leftMotor2);
-      analogWrite(rightMotorPWM, speedturnR);
-      analogWrite(leftMotorPWM, speedturnL);
-      line_position = readLine();
+      right();
 
+      line_position = readLine();
       while (sensor_values[6] < threshold)  // wait for outer most sensor to find the line
       {
         line_position = readLine();
       }
-      line_position = readLine();
 
+      line_position = readLine();
       while (sensor_values[5] < threshold || sensor_values[4] < threshold || sensor_values[3] < threshold)  // wait for outer most sensor to find the line
       {
         line_position = readLine();
       }
-      analogWrite(rightMotorPWM, 0);
-      analogWrite(leftMotorPWM, 0);
+
+      brake();
       delay(10);
       break;
 
     // Turn right 180deg to go back
-    case 'B':
-      digitalLow(rightMotor1);
-      digitalHigh(rightMotor2);
-      digitalLow(leftMotor1);
-      digitalHigh(leftMotor2);
-      analogWrite(rightMotorPWM, speedturnR);
-      analogWrite(leftMotorPWM, speedturnL);
+    case 'B':    
+      back();
       line_position = readLine();
-
       while (sensor_values[6] < threshold)  // wait for outer most sensor to find the line
       {
         line_position = readLine();
       }
-      line_position = readLine();
 
+      line_position = readLine();
       while (sensor_values[5] < threshold || sensor_values[4] < threshold || sensor_values[3] < threshold)  // wait for outer most sensor to find the line
       {
         line_position = readLine();
       }
-      analogWrite(rightMotorPWM, 0);
-      analogWrite(leftMotorPWM, 0);
+
+      brake();
       delay(10);
       break;
+      
     case 'S':
-      digitalLow(rightMotor2);
-      digitalHigh(rightMotor1);
-      digitalLow(leftMotor1);
-      digitalHigh(leftMotor2);
-      analogWrite(rightMotorPWM, speedturnR);
-      analogWrite(leftMotorPWM, speedturnL);
+      straight();
       delay(100);
-      analogWrite(rightMotorPWM, 0);
-      analogWrite(leftMotorPWM, 0);
+
+      brake();
       delay(10);
       break;
   }
@@ -91,7 +70,6 @@ void turn(char dir) {
 
 
 char select_turn(unsigned char found_left, unsigned char found_straight, unsigned char found_right) {
-
 
   if (found_left)
     return 'L';
@@ -126,10 +104,8 @@ void simplify_path() {
     }
   }
 
-
   total_angle = total_angle % 360;
-
-
+  
   switch (total_angle) {
     case 0:
       path[path_length - 3] = 'S';

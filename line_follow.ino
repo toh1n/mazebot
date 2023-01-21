@@ -17,6 +17,7 @@ void follow_line()  //follow the line
 
     int rightMotorSpeed =  rightMaxSpeed - motorSpeed;
     int leftMotorSpeed = leftMaxSpeed + motorSpeed;
+    lastError = error;
 
     if (rightMotorSpeed > MaxSpeed) rightMotorSpeed = MaxSpeed;  // prevent the motor from going beyond max speed
     if (leftMotorSpeed > MaxSpeed) leftMotorSpeed = MaxSpeed;    // prevent the motor from going beyond max speed
@@ -25,7 +26,7 @@ void follow_line()  //follow the line
 
     analogWrite(rightMotorPWM, rightMotorSpeed);
     analogWrite(leftMotorPWM, leftMotorSpeed);
-    lastError = error;
+    
 
     readLine();
     if (sensor_values[0] > 450 || sensor_values[7] > threshold) {

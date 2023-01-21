@@ -10,14 +10,10 @@ void setup() {
   pinAsOutput(led);
   pinAsOutput(buzzer);
   pinMode(button, INPUT_PULLUP);
-//  delay(2000);
   Serial.begin(9600);
 }
 
 void loop() {
-
-  //   int pos = readLine();
-  //    Serial.println(pos);
 
   while (digitalRead(button) == 1)
   {
@@ -31,14 +27,6 @@ void loop() {
 
   MazeSolve();
   getBackToStart();
-
-  // Serial.print("Sortest path : ");
-  // Serial.print(" ");
-  // for (int i = 0; i < path_length; i++) {
-  //   Serial.print(path[i]);
-  //   Serial.print(" ");
-  // }
-  // Serial.println();
-
   follow_path();
+
 }

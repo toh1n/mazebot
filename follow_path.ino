@@ -1,9 +1,8 @@
 void follow_path() {
   while (1) {
 
-    analogWrite(rightMotorPWM, 0);
-    analogWrite(leftMotorPWM, 0);
-    for (int i = 0; i < 10; i++) {
+    brake();
+    for (int i = 0; i < 5; i++) {
       digitalLow(led);
       delay(200);
       digitalHigh(led);
@@ -22,7 +21,10 @@ void follow_path() {
     for (int i = 0; i < path_length; i++) {
 
       follow_line();
+
       digitalHigh(buzzer);
+      digitalHigh(led);
+
       if (path[i] == 'S') {
         Serial.println("Taking Straight");
         delay(80);
@@ -35,7 +37,7 @@ void follow_path() {
       }
 
       digitalLow(buzzer);
-
+      digitalLow(led);
       turn(path[i]);
     }
     follow_line();

@@ -34,20 +34,24 @@ void getBackToStart() {
 
 
   for (int i = 0; i < path_length; i++) {
+
     follow_line();
     digitalHigh(buzzer);
+    digitalHigh(led);
+
     if (reversePath[i] == 'S') {
       Serial.println("Taking Straight");
-      delay(90);
+      delay(80);
     } else if (reversePath[i] == 'R') {
       Serial.println("Taking Right");
-      delay(90);
+      delay(80);
     } else {
       Serial.println("Taking Left");
-      delay(90);
+      delay(80);
     }
 
     digitalLow(buzzer);
+    digitalLow(led);
     turn(reversePath[i]);
   }
   follow_line();
@@ -56,37 +60,28 @@ void getBackToStart() {
 
 void rotate180() {
 
-  analogWrite(rightMotorPWM, 0);
-  analogWrite(leftMotorPWM, 0);
+  brake();
   delay(400);
-
-  digitalLow(rightMotor1);
-  digitalHigh(rightMotor2);
-  digitalLow(leftMotor1);
-  digitalHigh(leftMotor2);
-  analogWrite(rightMotorPWM, speedturnR);
-  analogWrite(leftMotorPWM, speedturnL);
+  right();
 
   line_position = readLine();
-
   while (sensor_values[6] > 400)  // wait for outer most sensor to find the line
   {
     line_position = readLine();
   }
   
   line_position = readLine();
-
   while (sensor_values[6] < threshold)  // wait for outer most sensor to find the line
   {
     line_position = readLine();
   }
-  line_position = readLine();
 
+  line_position = readLine();
   while (sensor_values[4] < threshold || sensor_values[3] < threshold)  // wait for outer most sensor to find the line
   {
     line_position = readLine();
   }
-  analogWrite(rightMotorPWM, 0);
-  analogWrite(leftMotorPWM, 0);
+
+  brake();
   delay(100);
 }
