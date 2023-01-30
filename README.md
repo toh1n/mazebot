@@ -1,0 +1,1 @@
+Note : The code used for port manipulation is specific to atmega 328P or arduino nano. So the code may no work for other arduino models. You can remove port manipulation part and use normal digitalWrite function and pinMode if you want.
