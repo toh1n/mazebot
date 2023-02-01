@@ -9,8 +9,7 @@ void follow_path() {
       delay(200);
     }
 
-    while (digitalRead(button) == 1)
-    {
+    while (digitalRead(button) == 1) {
       digitalRead(button);
     }
     delay(500);
@@ -27,13 +26,13 @@ void follow_path() {
 
       if (path[i] == 'S') {
         Serial.println("Taking Straight");
-        delay(80);
+        delay(getBackToStartDelay);
       } else if (path[i] == 'R') {
         Serial.println("Taking Right");
-        delay(80);
+        delay(getBackToStartDelay);
       } else {
         Serial.println("Taking Left");
-        delay(80);
+        delay(getBackToStartDelay);
       }
 
       digitalLow(buzzer);

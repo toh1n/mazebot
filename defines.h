@@ -17,31 +17,36 @@
 #define isLow(P) ((*(pinOfPin(P)) & pinMask(P)) == 0)
 #define digitalState(P) ((uint8_t)isHigh(P))
 
-#define rightMotor1 3
-#define rightMotor2 2
-#define rightMotorPWM 9
-#define leftMotor1 4
-#define leftMotor2 5
-#define leftMotorPWM 10
-#define threshold 500
+#define rightMotor1 5
+#define rightMotor2 4
+#define rightMotorPWM 10
+#define leftMotor1 3
+#define leftMotor2 2
+#define leftMotorPWM 9
+
+int threshold = 500;
+int turnThreshold = 450;
 #define led 13
 #define buzzer 11
 #define button 12
 
-#define Kp 0.1
-#define Kd 0.5
+#define getBackToStartDelay 80
+
+#define Kp 0.13
+#define Kd 0.65
 #define Ki .01
 int MaxSpeed = 145;
-int leftMaxSpeed = 115;
-int rightMaxSpeed = 180;
+int leftMaxSpeed = 200;
+int rightMaxSpeed = 200;
 int speedturnL = 60;
-int speedturnR = 80;
+int speedturnR = 60;
 int lastError = 0;
 
 #define N_SENS 8
 int sensor_values[N_SENS];
-int sens_max[N_SENS] = { 830, 880, 920, 880, 920, 920, 700, 780 };
-int sens_min[N_SENS] = { 35, 37, 52, 45, 52, 38, 32, 34 };
+int sensorValueCal[N_SENS];
+int sens_max[N_SENS] = { 992, 989, 988, 994, 996, 997, 988, 987 };
+int sens_min[N_SENS] = { 614, 681, 653, 550, 516, 638, 630, 621 };
 int sensor[N_SENS] = { 7, 6, 5, 4, 3, 2, 1, 0 };
 int lastPosition = 0;
 unsigned int line_position = 0;

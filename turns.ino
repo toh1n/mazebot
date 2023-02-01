@@ -1,68 +1,68 @@
 void turn(char dir) {
   switch (dir) {
-    
+
     case 'L':
       left();
-      line_position = readLine();
-      while (sensor_values[1] < threshold) {
-        line_position = readLine();
+      line_position = readBlackLine();
+      while (sensorValueCal[1] < turnThreshold) {
+        line_position = readBlackLine();
       }
 
-      line_position = readLine();
-      while (sensor_values[2] < threshold || sensor_values[3] < threshold || sensor_values[4] < threshold)  // wait for outer most sensor to find the line
+      line_position = readBlackLine();
+      while (sensorValueCal[2] < turnThreshold || sensorValueCal[3] < turnThreshold || sensorValueCal[4] < turnThreshold)  // wait for outer most sensor to find the line
       {
-        line_position = readLine();
+        line_position = readBlackLine();
       }
 
       brake();
-      delay(10);
+      delay(30);
       break;
 
     // Turn right 90deg
     case 'R':
       right();
 
-      line_position = readLine();
-      while (sensor_values[6] < threshold)  // wait for outer most sensor to find the line
+      line_position = readBlackLine();
+      while (sensorValueCal[6] < turnThreshold)  // wait for outer most sensor to find the line
       {
-        line_position = readLine();
+        line_position = readBlackLine();
       }
 
-      line_position = readLine();
-      while (sensor_values[5] < threshold || sensor_values[4] < threshold || sensor_values[3] < threshold)  // wait for outer most sensor to find the line
+      line_position = readBlackLine();
+      while (sensorValueCal[5] < turnThreshold || sensorValueCal[4] < turnThreshold || sensorValueCal[3] < turnThreshold)  // wait for outer most sensor to find the line
       {
-        line_position = readLine();
+        line_position = readBlackLine();
       }
 
       brake();
-      delay(10);
+      delay(30);
       break;
 
     // Turn right 180deg to go back
-    case 'B':    
+    case 'B':
       back();
-      line_position = readLine();
-      while (sensor_values[6] < threshold)  // wait for outer most sensor to find the line
+      line_position = readBlackLine();
+      while (sensorValueCal[6] < turnThreshold)  // wait for outer most sensor to find the line
       {
-        line_position = readLine();
+        line_position = readBlackLine();
       }
 
-      line_position = readLine();
-      while (sensor_values[5] < threshold || sensor_values[4] < threshold || sensor_values[3] < threshold)  // wait for outer most sensor to find the line
+      line_position = readBlackLine();
+      while (sensorValueCal[4] < turnThreshold && sensorValueCal[3] < turnThreshold)  // wait for outer most sensor to find the line
       {
-        line_position = readLine();
+        line_position = readBlackLine();
       }
 
       brake();
-      delay(10);
+      delay(40);
       break;
-      
-    case 'S':
-      straight();
-      delay(100);
 
-      brake();
-      delay(10);
+    case 'S':
+      //      straight();
+      //      delay(80);
+      //
+      //      brake();
+      //      delay(5);
       break;
   }
 }
@@ -105,7 +105,7 @@ void simplify_path() {
   }
 
   total_angle = total_angle % 360;
-  
+
   switch (total_angle) {
     case 0:
       path[path_length - 3] = 'S';

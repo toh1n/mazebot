@@ -15,18 +15,25 @@ void setup() {
 
 void loop() {
 
-  while (digitalRead(button) == 1)
-  {
+  // int p = readBlackLine();
+  //     for(int i=0;i<8;i++)
+  //   {
+  //     Serial.print(sensorValueCal[i]);
+  //     Serial.print(" ");
+  //   }
+
+  //   Serial.println(p);
+
+  while (digitalRead(button) == 1) {
     digitalRead(button);
   }
 
-  delay(1000);
+  delay(500);
 
   Serial.println("Hello Tohin!");
   Serial.println("Now Finding the sortest path!!!");
 
-  MazeSolve();
+  mazeSolve();
   getBackToStart();
   follow_path();
-
 }
